@@ -21,7 +21,7 @@ image: ./images/arknights-maa.avif
 
 ### MAA开源项目
 
-::github{repo=MaaAssistantArknights/MaaAssistantArknights}
+::github{repo="MaaAssistantArknights/MaaAssistantArknights"}
 
 MAA本身的功能实际上已经满足了绝大多数博士们的需求，配合安卓模拟器即可轻松实现一键清理日常，但笔者认为这还不够，有没有一种能够完全解放双手实现全自动化的一键日常的方式呢？答案当然是有的，实际上MAA的开发者们其实也为博士们提供了很多配置功能来辅助实现这样的效果。
 
