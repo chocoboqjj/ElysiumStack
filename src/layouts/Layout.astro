@@ -27,6 +27,9 @@ import type { Favicon } from "@/types/config";
 import { isHomePage } from "@/utils/layout-utils";
 import { url } from "@/utils/url-utils";
 
+import fs from "node:fs";
+import path from "node:path";
+
 import "@/styles/main.css";
 import "@/styles/variables.styl";
 import "@/styles/markdown-extend.styl";
@@ -85,6 +88,16 @@ if (!lang) {
 const siteLang = lang.replace("_", "-");
 
 // 使用固定的banner偏移量，position配置用于图片定位
+
+// 读取HeadConfig.html文件内容
+let customHeadHtml = "";
+try {
+	const headConfigPath = path.join(process.cwd(), "src", "config", "HeadConfig.html");
+	customHeadHtml = fs.readFileSync(headConfigPath, "utf-8");
+	customHeadHtml = customHeadHtml.replace(/<!--[\s\S]*?-->/g, "").trim();
+} catch (_error) {
+	// HeadConfig.html不存在或读取失败时忽略
+}
 ---
 
 <!doctype html>
@@ -539,6 +552,7 @@ const siteLang = lang.replace("_", "-");
     ></style>
     <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
+    {customHeadHtml && <Fragment set:html={customHeadHtml} />}
     <slot name="head" />
 
     <link
