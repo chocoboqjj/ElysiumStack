@@ -542,7 +542,7 @@ export const friendsConfig: FriendLink[] = [
 	{
 		"title": "羽天的驾驶舱",
 		"siteurl": "https://www.yutian233.top",
-		"imgurl": "http://www.yutian233.top/upload/cgi-bin_mmwebwx-bin_webwxgetmsgimg___MsgID_7876561108144232541_skey__crypt_d95c1199_bc58ab7d56720732.jpg",
+		"imgurl": "https://www.yutian233.top/upload/cgi-bin_mmwebwx-bin_webwxgetmsgimg___MsgID_7876561108144232541_skey__crypt_d95c1199_bc58ab7d56720732.jpg",
 		"desc": "物理発覚中。",
 		"tags": [
 			"Blog"

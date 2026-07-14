@@ -11,9 +11,9 @@ import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getRelatedPosts, getSortedPosts } from "@utils/content-utils";
 import {
-	getFileDirFromPath,
-	getPostUrlBySlug,
-	removeFileExtension,
+  getFileDirFromPath,
+  getPostUrlBySlug,
+  removeFileExtension,
 } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import dayjs from "dayjs";
@@ -32,15 +32,15 @@ import { getApiUrlList, processCoverImageSync } from "@/utils/image-utils";
 import { url } from "@/utils/url-utils";
 
 export async function getStaticPaths() {
-	const blogEntries = await getSortedPosts();
-	return blogEntries.map((entry) => {
-		// 将 id 转换为 slug（移除扩展名）以匹配路由参数
-		const slug = removeFileExtension(entry.id);
-		return {
-			params: { slug },
-			props: { entry },
-		};
-	});
+  const blogEntries = await getSortedPosts();
+  return blogEntries.map((entry) => {
+    // 将 id 转换为 slug（移除扩展名）以匹配路由参数
+    const slug = removeFileExtension(entry.id);
+    return {
+      params: { slug },
+      props: { entry },
+    };
+  });
 }
 
 const { entry } = Astro.props;
@@ -49,11 +49,11 @@ const { Content, headings } = await render(entry);
 const { remarkPluginFrontmatter } = await render(entry);
 
 const bannerPostMeta = {
-	title: entry.data.title,
-	published: entry.data.published,
-	updated: entry.data.updated,
-	words: remarkPluginFrontmatter.words,
-	minutes: remarkPluginFrontmatter.minutes,
+  title: entry.data.title,
+  published: entry.data.published,
+  updated: entry.data.updated,
+  words: remarkPluginFrontmatter.words,
+  minutes: remarkPluginFrontmatter.minutes,
 };
 
 // 处理随机图：如果image为"api"，则从配置的API获取随机图
@@ -62,70 +62,70 @@ const apiUrls = getApiUrlList(entry.data.image, entry.id);
 
 let posterCoverUrl = processedImage;
 if (processedImage) {
-	const isLocal = !(
-		processedImage.startsWith("/") ||
-		processedImage.startsWith("http") ||
-		processedImage.startsWith("https") ||
-		processedImage.startsWith("data:")
-	);
-	if (isLocal) {
-		const basePath = getFileDirFromPath(entry.filePath || "");
-		const files = import.meta.glob<ImageMetadata>("../../**", {
-			import: "default",
-		});
-		let normalizedPath = path
-			.normalize(path.join("../../", basePath, processedImage))
-			.replace(/\\/g, "/");
-		const file = files[normalizedPath];
-		if (file) {
-			const img = await file();
-			posterCoverUrl = img.src;
-		}
-	}
+  const isLocal = !(
+    processedImage.startsWith("/") ||
+    processedImage.startsWith("http") ||
+    processedImage.startsWith("https") ||
+    processedImage.startsWith("data:")
+  );
+  if (isLocal) {
+    const basePath = getFileDirFromPath(entry.filePath || "");
+    const files = import.meta.glob<ImageMetadata>("../../**", {
+      import: "default",
+    });
+    let normalizedPath = path
+      .normalize(path.join("../../", basePath, processedImage))
+      .replace(/\\/g, "/");
+    const file = files[normalizedPath];
+    if (file) {
+      const img = await file();
+      posterCoverUrl = img.src;
+    }
+  }
 }
 
 // 处理头像URL
 let posterAvatarUrl: string | null = profileConfig.avatar || null;
 if (posterAvatarUrl) {
-	const isLocalAvatar = !(
-		posterAvatarUrl.startsWith("/") ||
-		posterAvatarUrl.startsWith("http") ||
-		posterAvatarUrl.startsWith("https") ||
-		posterAvatarUrl.startsWith("data:")
-	);
-	if (isLocalAvatar) {
-		const files = import.meta.glob<ImageMetadata>("../../**", {
-			import: "default",
-		});
-		const normalizedPath = path
-			.normalize(path.join("../../", posterAvatarUrl))
-			.replace(/\\/g, "/");
-		const file = files[normalizedPath];
-		if (file) {
-			const img = await file();
-			posterAvatarUrl = img.src;
-		}
-	}
+  const isLocalAvatar = !(
+    posterAvatarUrl.startsWith("/") ||
+    posterAvatarUrl.startsWith("http") ||
+    posterAvatarUrl.startsWith("https") ||
+    posterAvatarUrl.startsWith("data:")
+  );
+  if (isLocalAvatar) {
+    const files = import.meta.glob<ImageMetadata>("../../**", {
+      import: "default",
+    });
+    const normalizedPath = path
+      .normalize(path.join("../../", posterAvatarUrl))
+      .replace(/\\/g, "/");
+    const file = files[normalizedPath];
+    if (file) {
+      const img = await file();
+      posterAvatarUrl = img.src;
+    }
+  }
 }
 
 dayjs.extend(utc);
 
 const jsonLd = {
-	"@context": "https://schema.org",
-	"@type": "BlogPosting",
-	headline: entry.data.title,
-	description: entry.data.description || entry.data.title,
-	keywords: entry.data.tags,
-	author: {
-		"@type": "Person",
-		name: profileConfig.name,
-		url: Astro.site,
-	},
-	datePublished: formatDateToYYYYMMDD(entry.data.published),
-	inLanguage: entry.data.lang
-		? entry.data.lang.replace("_", "-")
-		: siteConfig.lang.replace("_", "-"),
-	// TODO include cover image here
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.description || entry.data.title,
+  keywords: entry.data.tags,
+  author: {
+    "@type": "Person",
+    name: profileConfig.name,
+    url: Astro.site,
+  },
+  datePublished: formatDateToYYYYMMDD(entry.data.published),
+  inLanguage: entry.data.lang
+    ? entry.data.lang.replace("_", "-")
+    : siteConfig.lang.replace("_", "-"),
+  // TODO include cover image here
 };
 
 const relatedPosts = await getRelatedPosts(entry, 5);
@@ -145,7 +145,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
 >
   <!-- KaTeX 按需加载 - 仅在文章页面 -->
   <KatexManager slot="head" />
-  
+
   <script
     is:inline
     slot="head"
@@ -190,23 +190,21 @@ const relatedPosts = await getRelatedPosts(entry, 5);
                 i18n(
                   remarkPluginFrontmatter.minutes === 1
                     ? I18nKey.minuteCount
-                    : I18nKey.minutesCount
+                    : I18nKey.minutesCount,
                 )
             }
           </div>
         </div>
-        {entry.data.password && (
-          <div class="flex flex-row items-center">
-            <div
-              class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
-            >
-              <Icon is:inline name="material-symbols:lock-outline" />
+        {
+          entry.data.password && (
+            <div class="flex flex-row items-center">
+              <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                <Icon is:inline name="material-symbols:lock-outline" />
+              </div>
+              <div class="text-sm">{i18n(I18nKey.postEncrypted)}</div>
             </div>
-            <div class="text-sm">
-              {i18n(I18nKey.postEncrypted)}
-            </div>
-          </div>
-        )}
+          )
+        }
       </div>
 
       <!-- title -->
@@ -249,8 +247,9 @@ const relatedPosts = await getRelatedPosts(entry, 5);
           <div style="margin-top:1rem;">
             <CoverImage
               id="post-cover"
+              alt={entry.data.title}
               src={processedImage}
-              basePath={getFileDirFromPath(entry.filePath || '')}
+              basePath={getFileDirFromPath(entry.filePath || "")}
               class="mb-8 rounded-xl banner-container onload-animation"
               preview={false}
               apiUrls={apiUrls}
@@ -259,81 +258,88 @@ const relatedPosts = await getRelatedPosts(entry, 5);
         )
       }
 
-      {entry.data.password ? (
-        <EncryptedPost password={entry.data.password} slug={entry.id} hint={entry.data.passwordHint}>
-          <Markdown class="mb-6 markdown-content onload-animation">
-            <Content />
-          </Markdown>
+      {
+        entry.data.password ? (
+          <EncryptedPost
+            password={entry.data.password}
+            slug={entry.id}
+            hint={entry.data.passwordHint}
+          >
+            <Markdown class="mb-6 markdown-content onload-animation">
+              <Content />
+            </Markdown>
 
-          {/* 打赏按钮 & 分享按钮 */}
-          {
-            (siteConfig.post.sharePoster || (sponsorConfig.showButtonInPost && siteConfig.pages.sponsor)) && (
+            {/* 打赏按钮 & 分享按钮 */}
+            {(siteConfig.post.sharePoster ||
+              (sponsorConfig.showButtonInPost && siteConfig.pages.sponsor)) && (
               <div class="mb-6 rounded-xl onload-animation">
                 <div class="p-6 bg-(--license-block-bg) rounded-xl">
                   <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-3 flex-1">
                       <div class="h-12 w-12 rounded-lg bg-(--primary) flex items-center justify-center text-white dark:text-black/70 shrink-0">
-                        <Icon is:inline
-                          name={sponsorConfig.showButtonInPost &&
-                          siteConfig.pages.sponsor
-                            ? "material-symbols:favorite"
-                            : "material-symbols:share"}
+                        <Icon
+                          is:inline
+                          name={
+                            sponsorConfig.showButtonInPost &&
+                            siteConfig.pages.sponsor
+                              ? "material-symbols:favorite"
+                              : "material-symbols:share"
+                          }
                           class="text-2xl"
                         />
                       </div>
                       <div>
                         <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
-                          {
-                            sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
-                              ? i18n(I18nKey.sponsorButton)
-                              : i18n(I18nKey.shareOnSocial)
-                          }
+                          {sponsorConfig.showButtonInPost &&
+                          siteConfig.pages.sponsor
+                            ? i18n(I18nKey.sponsorButton)
+                            : i18n(I18nKey.shareOnSocial)}
                         </h3>
                         <p class="text-sm text-neutral-600 dark:text-neutral-400">
-                          {
-                            sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
-                              ? i18n(I18nKey.sponsorButtonText)
-                              : i18n(I18nKey.shareOnSocialDescription)
-                          }
+                          {sponsorConfig.showButtonInPost &&
+                          siteConfig.pages.sponsor
+                            ? i18n(I18nKey.sponsorButtonText)
+                            : i18n(I18nKey.shareOnSocialDescription)}
                         </p>
                       </div>
                     </div>
                     <div class="flex items-center gap-3">
-                      {
-                        siteConfig.post.sharePoster && (
-                          <SharePoster
-                            client:load
-                            title={entry.data.title}
-                            author={profileConfig.name}
-                            description={entry.data.description || entry.data.title}
-                            pubDate={formatDateToYYYYMMDD(entry.data.published)}
-                            coverImage={posterCoverUrl}
-                            url={Astro.url.href}
-                            siteTitle={siteConfig.title}
-                            avatar={posterAvatarUrl}
-                          />
-                        )
-                      }
-                      {
-                        sponsorConfig.showButtonInPost && siteConfig.pages.sponsor && (
+                      {siteConfig.post.sharePoster && (
+                        <SharePoster
+                          client:load
+                          title={entry.data.title}
+                          author={profileConfig.name}
+                          description={
+                            entry.data.description || entry.data.title
+                          }
+                          pubDate={formatDateToYYYYMMDD(entry.data.published)}
+                          coverImage={posterCoverUrl}
+                          url={Astro.url.href}
+                          siteTitle={siteConfig.title}
+                          avatar={posterAvatarUrl}
+                        />
+                      )}
+                      {sponsorConfig.showButtonInPost &&
+                        siteConfig.pages.sponsor && (
                           <a
                             href={url("/sponsor/")}
                             class="inline-flex items-center gap-2 px-6 py-3 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/80 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
                           >
                             <span>{i18n(I18nKey.sponsor)}</span>
-                            <Icon is:inline name="fa7-solid:arrow-right" class="text-sm" />
+                            <Icon
+                              is:inline
+                              name="fa7-solid:arrow-right"
+                              class="text-sm"
+                            />
                           </a>
-                        )
-                      }
+                        )}
                     </div>
                   </div>
                 </div>
               </div>
-            )
-          }
+            )}
 
-          {
-            licenseConfig.enable && (
+            {licenseConfig.enable && (
               <License
                 title={entry.data.title}
                 id={entry.id}
@@ -344,84 +350,85 @@ const relatedPosts = await getRelatedPosts(entry, 5);
                 licenseUrl={entry.data.licenseUrl}
                 class="mb-6 rounded-xl license-container onload-animation"
               />
-            )
-          }
-        </EncryptedPost>
-      ) : (
-        <>
-          <Markdown class="mb-6 markdown-content onload-animation">
-            <Content />
-          </Markdown>
+            )}
+          </EncryptedPost>
+        ) : (
+          <>
+            <Markdown class="mb-6 markdown-content onload-animation">
+              <Content />
+            </Markdown>
 
-          {/* 打赏按钮 & 分享按钮 */}
-          {
-            (siteConfig.post.sharePoster || (sponsorConfig.showButtonInPost && siteConfig.pages.sponsor)) && (
+            {/* 打赏按钮 & 分享按钮 */}
+            {(siteConfig.post.sharePoster ||
+              (sponsorConfig.showButtonInPost && siteConfig.pages.sponsor)) && (
               <div class="mb-6 rounded-xl onload-animation">
                 <div class="p-6 bg-(--license-block-bg) rounded-xl">
                   <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-3 flex-1">
                       <div class="h-12 w-12 rounded-lg bg-(--primary) flex items-center justify-center text-white dark:text-black/70 shrink-0">
-                        <Icon is:inline
-                          name={sponsorConfig.showButtonInPost &&
-                          siteConfig.pages.sponsor
-                            ? "material-symbols:favorite"
-                            : "material-symbols:share"}
+                        <Icon
+                          is:inline
+                          name={
+                            sponsorConfig.showButtonInPost &&
+                            siteConfig.pages.sponsor
+                              ? "material-symbols:favorite"
+                              : "material-symbols:share"
+                          }
                           class="text-2xl"
                         />
                       </div>
                       <div>
                         <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
-                          {
-                            sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
-                              ? i18n(I18nKey.sponsorButton)
-                              : i18n(I18nKey.shareOnSocial)
-                          }
+                          {sponsorConfig.showButtonInPost &&
+                          siteConfig.pages.sponsor
+                            ? i18n(I18nKey.sponsorButton)
+                            : i18n(I18nKey.shareOnSocial)}
                         </h3>
                         <p class="text-sm text-neutral-600 dark:text-neutral-400">
-                          {
-                            sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
-                              ? i18n(I18nKey.sponsorButtonText)
-                              : i18n(I18nKey.shareOnSocialDescription)
-                          }
+                          {sponsorConfig.showButtonInPost &&
+                          siteConfig.pages.sponsor
+                            ? i18n(I18nKey.sponsorButtonText)
+                            : i18n(I18nKey.shareOnSocialDescription)}
                         </p>
                       </div>
                     </div>
                     <div class="flex items-center gap-3">
-                      {
-                        siteConfig.post.sharePoster && (
-                          <SharePoster
-                            client:load
-                            title={entry.data.title}
-                            author={profileConfig.name}
-                            description={entry.data.description || entry.data.title}
-                            pubDate={formatDateToYYYYMMDD(entry.data.published)}
-                            coverImage={posterCoverUrl}
-                            url={Astro.url.href}
-                            siteTitle={siteConfig.title}
-                            avatar={posterAvatarUrl}
-                          />
-                        )
-                      }
-                      {
-                        sponsorConfig.showButtonInPost && siteConfig.pages.sponsor && (
+                      {siteConfig.post.sharePoster && (
+                        <SharePoster
+                          client:load
+                          title={entry.data.title}
+                          author={profileConfig.name}
+                          description={
+                            entry.data.description || entry.data.title
+                          }
+                          pubDate={formatDateToYYYYMMDD(entry.data.published)}
+                          coverImage={posterCoverUrl}
+                          url={Astro.url.href}
+                          siteTitle={siteConfig.title}
+                          avatar={posterAvatarUrl}
+                        />
+                      )}
+                      {sponsorConfig.showButtonInPost &&
+                        siteConfig.pages.sponsor && (
                           <a
                             href={url("/sponsor/")}
                             class="inline-flex items-center gap-2 px-6 py-3 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/80 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
                           >
                             <span>{i18n(I18nKey.sponsor)}</span>
-                            <Icon is:inline name="fa7-solid:arrow-right" class="text-sm" />
+                            <Icon
+                              is:inline
+                              name="fa7-solid:arrow-right"
+                              class="text-sm"
+                            />
                           </a>
-                        )
-                      }
+                        )}
                     </div>
                   </div>
                 </div>
               </div>
-            )
-          }
+            )}
 
-          {
-            licenseConfig.enable && (
+            {licenseConfig.enable && (
               <License
                 title={entry.data.title}
                 id={entry.id}
@@ -432,53 +439,62 @@ const relatedPosts = await getRelatedPosts(entry, 5);
                 licenseUrl={entry.data.licenseUrl}
                 class="mb-6 rounded-xl license-container onload-animation"
               />
-            )
-          }
-        </>
-      )}
+            )}
+          </>
+        )
+      }
     </div>
   </div>
 
   <!-- 上次编辑时间 -->
   {
-    siteConfig.post.showLastModified && (() => {
-      const lastModified = dayjs(entry.data.updated || entry.data.published);
-      const dateStr = lastModified.format("YYYY-MM-DD");
-      const outdatedThreshold = siteConfig.post.outdatedThreshold ?? 1;
+    siteConfig.post.showLastModified &&
+      (() => {
+        const lastModified = dayjs(entry.data.updated || entry.data.published);
+        const dateStr = lastModified.format("YYYY-MM-DD");
+        const outdatedThreshold = siteConfig.post.outdatedThreshold ?? 1;
 
-      // 1. 預設加上 hidden 隱藏，並把時間與閾值綁在 data-* 屬性
-      return (
-        <div 
-          id="outdated-card" 
-          class="card-base p-6 mb-4 hidden" 
-          data-date={lastModified.toISOString()} 
-          data-threshold={outdatedThreshold}
-        >
-          <div class="flex items-center gap-2">
-            <div class="transition h-9 w-9 rounded-lg overflow-hidden relative flex items-center justify-center mr-0">
-              <Icon is:inline
-                name="material-symbols:history-rounded"
-                class="text-4xl text-(--primary) transition-transform group-hover:translate-x-0.5 bg-(--enter-btn-bg) p-2 rounded-md"
-              />
-            </div>
-
-            <div class="flex flex-col gap-0.1">
-              <div class="text-[1.0rem] leading-tight text-black/75 dark:text-white/75">
-                {i18n(I18nKey.lastModifiedPrefix)}{dateStr}
-                <span id="days-ago-text" data-template={i18n(I18nKey.lastModifiedDaysAgo)}></span>
+        // 1. 預設加上 hidden 隱藏，並把時間與閾值綁在 data-* 屬性
+        return (
+          <div
+            id="outdated-card"
+            class="card-base p-6 mb-4 hidden"
+            data-date={lastModified.toISOString()}
+            data-threshold={outdatedThreshold}
+          >
+            <div class="flex items-center gap-2">
+              <div class="transition h-9 w-9 rounded-lg overflow-hidden relative flex items-center justify-center mr-0">
+                <Icon
+                  is:inline
+                  name="material-symbols:history-rounded"
+                  class="text-4xl text-(--primary) transition-transform group-hover:translate-x-0.5 bg-(--enter-btn-bg) p-2 rounded-md"
+                />
               </div>
-              <p id="outdated-warning" class="text-[0.8rem] leading-tight text-black/75 dark:text-white/75 hidden">
-                {i18n(I18nKey.lastModifiedOutdated)}
-              </p>
+
+              <div class="flex flex-col gap-0.1">
+                <div class="text-[1.0rem] leading-tight text-black/75 dark:text-white/75">
+                  {i18n(I18nKey.lastModifiedPrefix)}
+                  {dateStr}
+                  <span
+                    id="days-ago-text"
+                    data-template={i18n(I18nKey.lastModifiedDaysAgo)}
+                  />
+                </div>
+                <p
+                  id="outdated-warning"
+                  class="text-[0.8rem] leading-tight text-black/75 dark:text-white/75 hidden"
+                >
+                  {i18n(I18nKey.lastModifiedOutdated)}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      );
-    })()
+        );
+      })()
   }
 
   <script>
-    const card = document.getElementById('outdated-card');
+    const card = document.getElementById("outdated-card");
     const dateStr = card?.dataset.date;
 
     if (card && dateStr) {
@@ -491,17 +507,17 @@ const relatedPosts = await getRelatedPosts(entry, 5);
 
       // 如果超過閾值，就顯示卡片與提示文字
       if (daysDiff >= threshold) {
-        card.classList.remove('hidden');
+        card.classList.remove("hidden");
 
         if (daysDiff >= 1) {
-          const textEl = document.getElementById('days-ago-text');
+          const textEl = document.getElementById("days-ago-text");
           if (textEl && textEl.dataset.template) {
             textEl.textContent = `，${textEl.dataset.template.replace("{days}", daysDiff.toString())}`;
           }
 
-          const warningEl = document.getElementById('outdated-warning');
+          const warningEl = document.getElementById("outdated-warning");
           if (warningEl) {
-            warningEl.classList.remove('hidden');
+            warningEl.classList.remove("hidden");
           }
         }
       }
@@ -512,29 +528,43 @@ const relatedPosts = await getRelatedPosts(entry, 5);
     class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"
   >
     <a
-      href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : url("/")}
+      href={entry.data.nextSlug
+        ? getPostUrlBySlug(entry.data.nextSlug)
+        : url("/")}
       class="w-full font-bold overflow-hidden active:scale-95"
     >
-      <div class="btn-card rounded-2xl w-full h-15 max-w-full px-4 flex items-center justify-start! gap-4">
-        <Icon is:inline
+      <div
+        class="btn-card rounded-2xl w-full h-15 max-w-full px-4 flex items-center justify-start! gap-4"
+      >
+        <Icon
+          is:inline
           name="material-symbols:chevron-left-rounded"
           class="text-[2rem] text-(--primary)"
         />
-        <div class="overflow-hidden transition text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
+        <div
+          class="overflow-hidden transition text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75"
+        >
           {entry.data.nextTitle || i18n(I18nKey.home)}
         </div>
       </div>
     </a>
 
     <a
-      href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : url("/")}
+      href={entry.data.prevSlug
+        ? getPostUrlBySlug(entry.data.prevSlug)
+        : url("/")}
       class="w-full font-bold overflow-hidden active:scale-95"
     >
-      <div class="btn-card rounded-2xl w-full h-15 max-w-full px-4 flex items-center justify-end! gap-4">
-        <div class="overflow-hidden transition text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
+      <div
+        class="btn-card rounded-2xl w-full h-15 max-w-full px-4 flex items-center justify-end! gap-4"
+      >
+        <div
+          class="overflow-hidden transition text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75"
+        >
           {entry.data.prevTitle || i18n(I18nKey.home)}
         </div>
-        <Icon is:inline
+        <Icon
+          is:inline
           name="material-symbols:chevron-right-rounded"
           class="text-[2rem] text-(--primary)"
         />
