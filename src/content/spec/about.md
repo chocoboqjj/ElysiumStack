@@ -10,7 +10,8 @@
 
 **ElysiumStack** 是我的个人博客，目前已从**Halo**动态站迁移至了 **Astro** 框架构建的静态站，博客主题采用了夏叶大佬的 [Firefly](https://github.com/CuteLeaf/Firefly) 模板，同时加上了一些自己的魔改，是不是很像**Fuwari**。没错！**Firefly** 是基于 [Fuwari](https://github.com/saicaca/fuwari) 的二次开发。
 
-::github{repo="CuteLeaf/Firefly"}
+::github{repo=CuteLeaf/Firefly}
 
-::github{repo="saicaca/fuwari"}
+::github{repo=saicaca/fuwari}
+
 

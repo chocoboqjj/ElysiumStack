@@ -7810,7 +7810,7 @@ snapshots:
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
       '@jridgewell/set-array': 1.2.1
-      '@jridgewell/sourcemap-codec': 1.5.0
+      '@jridgewell/sourcemap-codec': 1.4.10
       '@jridgewell/trace-mapping': 0.3.31
 
   '@jridgewell/remapping@2.3.5':
@@ -10560,7 +10560,7 @@ snapshots:
       ccount: 2.0.1
       devlop: 1.1.0
       mdast-util-from-markdown: 2.0.3(supports-color@10.2.2)
-      mdast-util-to-markdown: 2.1.2
+      mdast-util-to-markdown: 2.0.0
       parse-entities: 4.0.2
       stringify-entities: 4.0.4
       unist-util-visit-parents: 6.0.2
@@ -11872,7 +11872,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.5
       hast-util-from-html: 2.0.3
-      unified: 11.0.5
+      unified: 11.0.0
 
   rehype-raw@7.0.0:
     dependencies:
@@ -11907,7 +11907,7 @@ snapshots:
       '@types/hast': 3.0.5
       rehype-parse: 9.0.1
       rehype-stringify: 10.0.1
-      unified: 11.0.5
+      unified: 11.0.0
 
   remark-admonition-to-blockquote-callout@1.0.0:
     dependencies:
