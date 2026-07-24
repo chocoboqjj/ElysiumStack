@@ -71,12 +71,6 @@ const quality = configQuality;
 // 是否显示加载动画
 const showLoading = coverImageConfig.showLoading ?? true;
 
-// 检查回退图片是否需要 referrerpolicy
-const fallbackReferrerPolicy =
-	isFallbackPublic && fallbackPath && shouldAddNoReferrer(url(fallbackPath))
-		? "no-referrer"
-		: undefined;
-
 // 检查远程图片是否需要 referrerpolicy
 const remoteReferrerPolicy =
 	!isLocal && shouldAddNoReferrer(isPublic ? url(src) : src)

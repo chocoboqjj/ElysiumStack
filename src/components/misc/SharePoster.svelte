@@ -8,16 +8,16 @@ import { url as withBase } from "@/utils/url-utils";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 
-	export let title: string;
-	export let author: string;
-	export let description = "";
-	export let pubDate: string;
-	export let coverImage: string | null = null;
-	export let coverImageSelector: string | null = null;
-	export let url: string;
-	export let siteTitle: string;
-	export let avatar: string | null = null;
-	export let avatarSelector: string | null = null;
+export let title: string;
+export let author: string;
+export let description = "";
+export let pubDate: string;
+export let coverImage: string | null = null;
+export let coverImageSelector: string | null = null;
+export let url: string;
+export let siteTitle: string;
+export let avatar: string | null = null;
+export let avatarSelector: string | null = null;
 
 let showModal = false;
 let posterImage: string | null = null;
@@ -117,6 +117,15 @@ function resolveSiteLogoSource(color: string, size: number): string | null {
 		: null;
 }
 
+function resolveImageSource(
+	src: string | null,
+	selector: string | null,
+): string | null {
+	if (!selector) return src;
+	const image = document.querySelector<HTMLImageElement>(selector);
+	return image?.currentSrc || image?.src || src;
+}
+
 function getLines(
 	ctx: CanvasRenderingContext2D,
 	text: string,
@@ -206,14 +215,12 @@ async function generatePoster() {
 			coverImageSelector,
 		);
 		const resolvedAvatar = resolveImageSource(avatar, avatarSelector);
-		const resolvedSiteLogo = resolveSiteLogoSource(headerTextColor, logoBox);
-		const [qrImg, coverImg, avatarImg, logoImg] = await Promise.all([
+		const [qrImg, coverImg, avatarImg] = await Promise.all([
 			loadImage(qrCodeUrl),
 			resolvedCoverImage
 				? loadImage(resolvedCoverImage)
 				: Promise.resolve(null),
 			resolvedAvatar ? loadImage(resolvedAvatar) : Promise.resolve(null),
-			resolvedSiteLogo ? loadImage(resolvedSiteLogo) : Promise.resolve(null),
 		]);
 
 	function resolveImageSource(
@@ -239,7 +246,7 @@ async function generatePoster() {
 		let currentY = 0;
 
 		// Cover
-		const coverHeight = (coverImg ? 200 : 64) * scale;
+		const coverHeight = (resolvedCoverImage ? 200 : 120) * scale;
 		currentY += coverHeight;
 		currentY += padding; // Gap after cover
 
@@ -513,8 +520,7 @@ async function generatePoster() {
 
 		const authorTextX =
 			padding + (resolvedAvatar ? 64 * scale + 16 * scale : 0);
-		const authorMaxWidth = qrX - 24 * scale - authorTextX;
-		const textCenterY = authorY + 32 * scale;
+		const textCenterY = footerY + 32 * scale;
 
 		ctx.textAlign = "left";
 		ctx.textBaseline = "top";
