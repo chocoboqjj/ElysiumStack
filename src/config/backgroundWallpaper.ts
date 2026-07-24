@@ -91,6 +91,10 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 				pauseTime: 2000,
 			},
 		},
+		// 文章横幅信息："description" 显示描述，"meta" 显示日期、字数和阅读时长
+		postInfo: {
+			mode: "description",
+		},
 		// 导航栏配置
 		navbar: {
 			// 导航栏透明模式："semi" 半透明，"full" 完全透明，"semifull" 动态透明
