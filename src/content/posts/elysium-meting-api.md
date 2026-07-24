@@ -17,7 +17,7 @@ image: ./images/meting-install.avif
 
 ## 相关资源
 
-::github{repo="metowolf/Meting-API"}
+::github{repo=metowolf/Meting-API}
 
 ## 使用方法
 
