@@ -72,6 +72,12 @@ export const ko: Translation = {
 	[Key.commentNotConfigured]: "댓글 시스템이 설정되지 않았습니다",
 	[Key.guestbookCommentHint]:
 		"설정 파일에서 댓글 시스템을 아직 활성화하지 않았습니다. 활성화하면 방문자가 이곳에 메시지를 남길 수 있습니다",
+	[Key.latestComments]: "최신 댓글",
+	[Key.latestCommentsLoading]: "불러오는 중…",
+	[Key.latestCommentsEmpty]: "아직 댓글이 없습니다",
+	[Key.latestCommentsError]: "댓글을 불러오지 못했습니다",
+	[Key.latestCommentsNotSupported]: "현재 댓글 시스템은 최신 댓글을 지원하지 않습니다",
+	[Key.moreComments]: "댓글 더보기",
 	[Key.friends]: "친구",
 	[Key.friendsDescription]:
 		"여기는 제 친구들입니다. 방문하여 서로 교류해 보세요",

@@ -72,6 +72,12 @@ export const ja: Translation = {
 	[Key.commentNotConfigured]: "コメントシステムが設定されていません",
 	[Key.guestbookCommentHint]:
 		"設定ファイルでコメントシステムをまだ有効にしていません。有効にすると、訪問者がここにメッセージを残せるようになります",
+	[Key.latestComments]: "最新コメント",
+	[Key.latestCommentsLoading]: "読み込み中…",
+	[Key.latestCommentsEmpty]: "コメントはまだありません",
+	[Key.latestCommentsError]: "コメントの読み込みに失敗しました",
+	[Key.latestCommentsNotSupported]: "現在のコメントシステムは最新コメントに対応していません",
+	[Key.moreComments]: "もっと見る",
 	[Key.friends]: "友達",
 	[Key.friendsDescription]:
 		"ここは私の友達です、お互いに訪問して交流することを歓迎します",

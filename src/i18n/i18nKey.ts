@@ -52,6 +52,14 @@ enum I18nKey {
 	commentNotConfigured = "commentNotConfigured",
 	guestbookCommentHint = "guestbookCommentHint",
 
+	// 最新评论
+	latestComments = "latestComments",
+	latestCommentsLoading = "latestCommentsLoading",
+	latestCommentsEmpty = "latestCommentsEmpty",
+	latestCommentsError = "latestCommentsError",
+	latestCommentsNotSupported = "latestCommentsNotSupported",
+	moreComments = "moreComments",
+
 	untitled = "untitled",
 	uncategorized = "uncategorized",
 	noTags = "noTags",

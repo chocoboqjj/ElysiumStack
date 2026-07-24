@@ -72,6 +72,12 @@ export const zh_TW: Translation = {
 	[Key.commentNotConfigured]: "評論系統暫未配置",
 	[Key.guestbookCommentHint]:
 		"您還未在配置文件中啟用評論系統，啟用後訪客才可在此留言",
+	[Key.latestComments]: "最新評論",
+	[Key.latestCommentsLoading]: "載入中…",
+	[Key.latestCommentsEmpty]: "暫無評論",
+	[Key.latestCommentsError]: "評論載入失敗",
+	[Key.latestCommentsNotSupported]: "當前評論系統不支援最新評論",
+	[Key.moreComments]: "更多評論",
 	[Key.friends]: "友鏈",
 	[Key.friendsDescription]: "這裡是我的朋友們，歡迎互相訪問交流",
 	[Key.searchFriends]: "搜尋友鏈...",

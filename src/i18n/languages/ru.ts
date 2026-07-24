@@ -72,6 +72,12 @@ export const ru: Translation = {
 	[Key.commentNotConfigured]: "Система комментариев не настроена",
 	[Key.guestbookCommentHint]:
 		"Вы еще не включили систему комментариев в файле конфигурации. После включения посетители смогут оставлять сообщения здесь",
+	[Key.latestComments]: "Последние комментарии",
+	[Key.latestCommentsLoading]: "Загрузка…",
+	[Key.latestCommentsEmpty]: "Комментариев пока нет",
+	[Key.latestCommentsError]: "Не удалось загрузить комментарии",
+	[Key.latestCommentsNotSupported]: "Текущая система комментариев не поддерживает последние комментарии",
+	[Key.moreComments]: "Ещё комментарии",
 	[Key.friends]: "Ссылки",
 	[Key.friendsDescription]:
 		"Вот мои друзья, добро пожаловать посетить и общаться друг с другом",

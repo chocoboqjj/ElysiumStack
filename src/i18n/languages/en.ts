@@ -72,6 +72,12 @@ export const en: Translation = {
 	[Key.commentNotConfigured]: "Comment system not configured",
 	[Key.guestbookCommentHint]:
 		"You have not enabled the comment system in the configuration file yet. After enabling it, visitors will be able to leave messages here",
+	[Key.latestComments]: "Latest Comments",
+	[Key.latestCommentsLoading]: "Loading…",
+	[Key.latestCommentsEmpty]: "No comments yet",
+	[Key.latestCommentsError]: "Failed to load comments",
+	[Key.latestCommentsNotSupported]: "The current comment system does not support recent comments",
+	[Key.moreComments]: "More Comments",
 	[Key.friends]: "Friends",
 	[Key.friendsDescription]:
 		"Here are my friends, welcome to visit and communicate with each other",

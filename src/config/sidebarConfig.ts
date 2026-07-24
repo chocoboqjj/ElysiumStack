@@ -120,6 +120,20 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			},
 		},
 		{
+			// 组件类型：最新评论组件（客户端通过 Twikoo SDK 拉取，无需服务端渲染）
+			type: "latestComments",
+			// 是否启用该组件
+			enable: true,
+			// 组件位置
+			position: "top",
+			// 是否在文章详情页显示
+			showOnPostPage: true,
+			// 自定义属性：显示的最新评论条数
+			customProps: {
+				limit: 5,
+			},
+		},
+		{
 			// 组件类型：站点统计组件
 			type: "stats",
 			// 是否启用该组件

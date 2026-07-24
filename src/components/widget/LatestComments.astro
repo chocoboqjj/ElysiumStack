@@ -1,0 +1,40 @@
+---
+import WidgetLayout from "@/components/common/WidgetLayout.astro";
+import LatestCommentsSidebar from "@/components/widget/LatestCommentsSidebar.svelte";
+import { commentConfig } from "@/config/commentConfig";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import type { WidgetComponentConfig } from "@/types/config";
+
+interface Props {
+	class?: string;
+	style?: string;
+	widgetConfig?: WidgetComponentConfig;
+}
+const { class: className, style, widgetConfig } = Astro.props;
+
+const showTitle = widgetConfig?.showTitle !== false;
+const limit = Math.max(1, Math.floor(Number((widgetConfig?.customProps as Record<string, unknown> | undefined)?.limit) || 5));
+
+const twikooEnvId = commentConfig.twikoo?.envId ?? "";
+const twikooJsUrl =
+	commentConfig.twikoo?.jsUrl ??
+	"https://cdn.jsdelivr.net/npm/twikoo@1.7.14/dist/twikoo.min.js";
+---
+
+<WidgetLayout
+	name={i18n(I18nKey.latestComments)}
+	showTitle={showTitle}
+	id="latest-comments"
+	class={className}
+	style={style}
+>
+	<!-- 评论数据在客户端通过 Twikoo SDK 拉取，静态构建阶段不请求服务端 -->
+	<LatestCommentsSidebar
+		client:load
+		commentType={commentConfig.type}
+		envId={twikooEnvId}
+		jsUrl={twikooJsUrl}
+		limit={limit}
+	/>
+</WidgetLayout>
