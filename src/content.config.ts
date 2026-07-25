@@ -30,6 +30,7 @@ type PostData = {
 type DynamicData = {
 	published: Date;
 	pinned: boolean;
+	location: string;
 };
 
 type ContentCollection<T> = CollectionConfig<
