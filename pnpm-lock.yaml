@@ -110,6 +110,9 @@ importers:
       expressive-code-language-badge:
         specifier: ^1.1.0
         version: 1.1.0(@astrojs/starlight@0.41.4(@astrojs/markdown-remark@7.2.1)(astro@7.1.3(@astrojs/markdown-remark@7.2.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.1)(jiti@2.7.0)(rollup@2.80.0)(stylus@0.64.0)(terser@5.46.0)(tsx@4.23.1)(yaml@2.9.0))(typescript@6.0.3))(@expressive-code/core@0.44.1)
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
       glob:
         specifier: ^13.0.6
         version: 13.0.6
@@ -212,7 +215,7 @@ importers:
         version: 1.2.4
       '@tailwindcss/vite':
         specifier: ^4.3.3
-        version: 4.3.3(vite@8.1.0(@types/node@25.9.1)(esbuild@0.28.1)(jiti@2.7.0)(stylus@0.64.0)(terser@5.46.0)(tsx@4.23.1)(yaml@2.9.0))
+        version: 4.3.3(vite@8.1.5(@types/node@25.9.1)(esbuild@0.28.1)(jiti@2.7.0)(stylus@0.64.0)(terser@5.46.0)(tsx@4.23.1)(yaml@2.9.0))
       '@types/qrcode':
         specifier: ^1.5.6
         version: 1.5.6
@@ -2507,8 +2510,8 @@ packages:
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
 
-  argparse@1.0.7:
-    resolution: {integrity: sha512-svfNOD2ovohwmmIi/Y1NtBuc53G8RhPLeIMBwB0uTK8pXV1yu0+ZVzj+XHFDFWAPYflfOvPLQxjUB8WpnObhjg==}
+  argparse@1.0.10:
+    resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -3241,6 +3244,11 @@ packages:
   esm-env@1.2.2:
     resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
 
+  esprima@4.0.1:
+    resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
+    engines: {node: '>=4'}
+    hasBin: true
+
   esrap@2.3.0:
     resolution: {integrity: sha512-GQ/7RN8uOtEfNpzZzBMTzW9JBcX42oaSVtPzdF+6cEL8pqIL094iUpr9jzYGn4O4P/1S60dJ6izyT8F4LYARng==}
     peerDependencies:
@@ -3308,6 +3316,10 @@ packages:
 
   expressive-code@0.44.1:
     resolution: {integrity: sha512-GakidxhapWDzpKLqEaFQ8wGk6gAqEtPQibu8+yPBfnDLgev5Vdsh1pasTxnrXL/mzIknyqeTwhMHTghdaiUrTg==}
+
+  extend-shallow@2.0.1:
+    resolution: {integrity: sha512-zCnTtlxNoAiDc3gqY2aYAWFx7XWWiasuF2K8Me5WbN8otHKTUKBwjPtNpRs/rbUZm7KxWAaNj7P1a/p52GbVug==}
+    engines: {node: '>=0.10.0'}
 
   extend-shallow@2.0.1:
     resolution: {integrity: sha512-zCnTtlxNoAiDc3gqY2aYAWFx7XWWiasuF2K8Me5WbN8otHKTUKBwjPtNpRs/rbUZm7KxWAaNj7P1a/p52GbVug==}
@@ -3806,10 +3818,6 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
-  is-document.all@1.0.0:
-    resolution: {integrity: sha512-+XSoyS05OdBbhFuELhgTCpFNHkpBOJqtsZfUFFpe5QTw+9Sjbh8zitxhQkYAo6wV7e1Vb8cAPvpCk9jGam/82g==}
-    engines: {node: '>= 0.4'}
-
   is-extendable@0.1.1:
     resolution: {integrity: sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw==}
     engines: {node: '>=0.10.0'}
@@ -3936,6 +3944,10 @@ packages:
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
+
+  js-yaml@3.15.0:
+    resolution: {integrity: sha512-ttBQIIQPDeLjpPOohtUdXuXUVoA2uIB6fEH9HyJ7234s5mBJ5wTx20njxplLZQgLaOfpmPQA7X2t5AX6tIPbog==}
+    hasBin: true
 
   js-yaml@4.3.0:
     resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
@@ -5396,10 +5408,6 @@ packages:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
     engines: {node: '>=4'}
 
-  semver@6.0.0:
-    resolution: {integrity: sha512-0UewU+9rFapKFnlbirLi3byoOuhrSsli/z/ihNnvM24vgF+8sNBiI1LZPBSH9wJKUwaUbw+s3hToDLCXkrghrQ==}
-    hasBin: true
-
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -5609,12 +5617,8 @@ packages:
     resolution: {integrity: sha512-uCC2VHvQRYu+lMh4My/sFNmF2klFymLX1wHJeXnbEJERpV/ZsVuonzerjfrGpIGF7LBVa1O7i9kjiWvJiFck8g==}
     engines: {node: '>=0.10.0'}
 
-  strip-final-newline@2.0.0:
-    resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
-    engines: {node: '>=6'}
-
-  strnum@2.4.1:
-    resolution: {integrity: sha512-M9eUSMT2dCB2cTNPG7UYj6KuK7RJR2SN2+yCV/fTW3xzTCS6EaGZ5pSMgDIjB7r8zSfTGk+dvvn9rTjpVS9Mwg==}
+  strnum@2.2.2:
+    resolution: {integrity: sha512-DnR90I+jtXNSTXWdwrEy9FakW7UX+qUZg28gj5fk2vxxl7uS/3bpI4fjFYVmdK9etptYBPNkpahuQnEwhwECqA==}
 
   style-inject@0.3.0:
     resolution: {integrity: sha512-IezA2qp+vcdlhJaVm5SOdPPTUu0FCEqfNSli2vRuSIBbu5Nq5UvygTk/VzeCqfLz2Atj3dVII5QBKGZRZ0edzw==}
@@ -8539,12 +8543,12 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.3.3
 
-  '@tailwindcss/vite@4.3.3(vite@8.1.0(@types/node@25.9.1)(esbuild@0.28.1)(jiti@2.7.0)(stylus@0.64.0)(terser@5.46.0)(tsx@4.23.1)(yaml@2.9.0))':
+  '@tailwindcss/vite@4.3.3(vite@8.1.5(@types/node@25.9.1)(esbuild@0.28.1)(jiti@2.7.0)(stylus@0.64.0)(terser@5.46.0)(tsx@4.23.1)(yaml@2.9.0))':
     dependencies:
       '@tailwindcss/node': 4.3.3
       '@tailwindcss/oxide': 4.3.3
       tailwindcss: 4.3.3
-      vite: 8.1.0(@types/node@25.9.1)(esbuild@0.28.1)(jiti@2.7.0)(stylus@0.64.0)(terser@5.46.0)(tsx@4.23.1)(yaml@2.9.0)
+      vite: 8.1.5(@types/node@25.9.1)(esbuild@0.28.1)(jiti@2.7.0)(stylus@0.64.0)(terser@5.46.0)(tsx@4.23.1)(yaml@2.9.0)
 
   '@tybys/wasm-util@0.10.3':
     dependencies:
@@ -8742,7 +8746,7 @@ snapshots:
 
   arg@5.0.2: {}
 
-  argparse@1.0.7:
+  argparse@1.0.10:
     dependencies:
       sprintf-js: 1.0.3
 
@@ -9681,6 +9685,8 @@ snapshots:
 
   esm-env@1.2.2: {}
 
+  esprima@4.0.1: {}
+
   esrap@2.3.0:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -9752,6 +9758,10 @@ snapshots:
       '@expressive-code/plugin-frames': 0.44.1
       '@expressive-code/plugin-shiki': 0.44.1
       '@expressive-code/plugin-text-markers': 0.44.1
+
+  extend-shallow@2.0.1:
+    dependencies:
+      is-extendable: 0.1.1
 
   extend-shallow@2.0.1:
     dependencies:
@@ -10408,10 +10418,6 @@ snapshots:
 
   is-docker@4.0.0: {}
 
-  is-document.all@1.0.0:
-    dependencies:
-      call-bound: 1.0.4
-
   is-extendable@0.1.1: {}
 
   is-finalizationregistry@1.1.1:
@@ -10530,6 +10536,11 @@ snapshots:
   jiti@2.7.0: {}
 
   js-tokens@4.0.0: {}
+
+  js-yaml@3.15.0:
+    dependencies:
+      argparse: 1.0.10
+      esprima: 4.0.1
 
   js-yaml@4.3.0:
     dependencies:
@@ -12433,8 +12444,6 @@ snapshots:
       extend-shallow: 2.0.1
       kind-of: 6.0.3
 
-  semver@6.0.0: {}
-
   semver@6.3.1: {}
 
   semver@7.8.5: {}
@@ -12726,11 +12735,7 @@ snapshots:
 
   strip-bom-string@1.0.0: {}
 
-  strip-final-newline@2.0.0: {}
-
-  strnum@2.4.1:
-    dependencies:
-      anynum: 1.0.1
+  strnum@2.2.2: {}
 
   style-inject@0.3.0: {}
 
