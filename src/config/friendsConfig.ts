@@ -135,7 +135,7 @@ export const friendsConfig: FriendLink[] = [
 	{
 		"title": "Honesty",
 		"siteurl": "https://blog.hehouhui.cn",
-		"imgurl": "https://www.hehouhui.cn/images/avatar.jpeg",
+		"imgurl": "https://cdn.jsdelivr.net/gh/listener-He/images@default/202309111525908.jpeg",
 		"desc": "花有重开日，人无再少年",
 		"tags": [
 			"Blog"
@@ -190,7 +190,7 @@ export const friendsConfig: FriendLink[] = [
 	{
 		"title": "寒士杰克",
 		"siteurl": "https://www.hansjack.com",
-		"imgurl": "https://www.hansjack.com/favicon.ico",
+		"imgurl": "https://www.hansjack.com/usr/themes/HansJack/logo.avif",
 		"desc": "喜欢捣鼓，不断进步！",
 		"tags": [
 			"Blog"
@@ -223,7 +223,7 @@ export const friendsConfig: FriendLink[] = [
 	{
 		"title": "致星极客 | To STAR",
 		"siteurl": "https://2star.top",
-		"imgurl": "https://2star.top/upload/zxjkicon.webp",
+		"imgurl": "https://2star.top/favicon/icon.webp",
 		"desc": "创造属于你我的「奇迹」",
 		"tags": [
 			"Blog"
@@ -377,7 +377,7 @@ export const friendsConfig: FriendLink[] = [
 	{
 		"title": "枝动力の小站",
 		"siteurl": "https://zhidongli.top",
-		"imgurl": "https://zhidongli.top/OIP-C.webp",
+		"imgurl": "https://zhidongli.top/Photo.jpg",
 		"desc": "渺渺星海，唯我独芒！",
 		"tags": [
 			"Blog"
@@ -628,10 +628,10 @@ export const friendsConfig: FriendLink[] = [
 		"enabled": true
 	},
 	{
-		"title": "梦涵LOVEの小窝",
-		"siteurl": "https://heyuhan.huohuo.ink",
-		"imgurl": "https://heyuhan.huohuo.ink/upload/%E6%A2%A6%E6%B6%B5LOVE-2.jpg",
-		"desc": "一个一个小涵子的小 BLOG，一起来分享生活的小确幸吧～",
+		"title": "Fry酥条の博客",
+		"siteurl": "https://blog.fryfries13.cn",
+		"imgurl": "https://blog.fryfries13.cn/upload/Fry%E9%85%A5%E6%9D%A1.png",
+		"desc": "未来已来，尽在掌握！",
 		"tags": [
 			"Blog"
 		],
@@ -639,10 +639,10 @@ export const friendsConfig: FriendLink[] = [
 		"enabled": true
 	},
 	{
-		"title": "Fry酥条の博客",
-		"siteurl": "https://blog.fryfries13.cn",
-		"imgurl": "https://blog.fryfries13.cn/upload/Fry%E9%85%A5%E6%9D%A1.png",
-		"desc": "未来已来，尽在掌握！",
+		"title": "amfe的小站",
+		"siteurl": "https://amfe.space",
+		"imgurl": "https://amfe.space/upload/error_med_56dp_B760D7_FILL0_wght400_GRAD0_opsz48.svg",
+		"desc": "多喝水",
 		"tags": [
 			"Blog"
 		],
