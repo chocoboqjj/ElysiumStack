@@ -126,6 +126,75 @@ function resolveImageSource(
 	return image?.currentSrc || image?.src || src;
 }
 
+// 站点 Logo：图标优先复用导航栏已渲染的 SVG（astro-icon 覆盖完整图标库），图片复用导航栏已优化的地址
+function serializeNavbarIcon(color: string, size: number): string | null {
+	const svg = document.querySelector<SVGSVGElement>("#navbar svg.navbar-logo");
+	if (!svg) return null;
+
+	const clone = svg.cloneNode(true) as SVGSVGElement;
+	clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+	// 导航栏图标宽高是 1em，脱离文档后需要显式尺寸才能被 canvas 光栅化
+	clone.setAttribute("width", String(size));
+	clone.setAttribute("height", String(size));
+	clone.removeAttribute("class");
+	// 让图标内部的 currentColor 解析成海报里的颜色
+	clone.setAttribute("style", `color:${color}`);
+
+	const markup = new XMLSerializer().serializeToString(clone);
+	return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(markup)}`;
+}
+
+function buildIconDataUrl(icon: string, color: string): string | null {
+	const [prefix, name] = icon.split(":");
+	if (!prefix || !name) return null;
+
+	const collection = (
+		iconsData as Record<
+			string,
+			{
+				icons?: Record<string, { body: string }>;
+				width?: number;
+				height?: number;
+			}
+		>
+	)[prefix];
+	const body = collection?.icons?.[name]?.body;
+	if (!body) return null;
+
+	const iconWidth = collection.width ?? 24;
+	const iconHeight = collection.height ?? 24;
+	const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${iconWidth}" height="${iconHeight}" viewBox="0 0 ${iconWidth} ${iconHeight}">${body.replaceAll("currentColor", color)}</svg>`;
+
+	return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function resolveSiteLogoSource(color: string, size: number): string | null {
+	const logo = siteConfig.navbar.logo;
+	if (!logo?.value) return null;
+
+	if (logo.type === "icon") {
+		// icons-data.json 只含 Svelte 组件用到的图标子集，因此优先取导航栏的 SVG
+		return (
+			serializeNavbarIcon(color, size) ?? buildIconDataUrl(logo.value, color)
+		);
+	}
+
+	// src 目录下的图片经 Astro 优化后只有导航栏能拿到最终地址
+	// 海报背景是白色，因此固定取亮色版本的 Logo
+	const navbarLogo =
+		document.querySelector<HTMLImageElement>(
+			'#navbar img.navbar-logo[data-logo-theme="light"]',
+		) ?? document.querySelector<HTMLImageElement>("#navbar img.navbar-logo");
+	const navbarLogoSrc = navbarLogo?.currentSrc || navbarLogo?.src;
+	if (navbarLogoSrc) return navbarLogoSrc;
+
+	if (logo.type === "url") return logo.value;
+	// public 目录下的图片可直接拼接 base 路径，src 目录下的则无法在客户端还原
+	return logo.value.startsWith("/") || logo.value.startsWith("http")
+		? withBase(logo.value)
+		: null;
+}
+
 function getLines(
 	ctx: CanvasRenderingContext2D,
 	text: string,
@@ -215,12 +284,14 @@ async function generatePoster() {
 			coverImageSelector,
 		);
 		const resolvedAvatar = resolveImageSource(avatar, avatarSelector);
-		const [qrImg, coverImg, avatarImg] = await Promise.all([
+		const resolvedSiteLogo = resolveSiteLogoSource(headerTextColor, logoBox);
+		const [qrImg, coverImg, avatarImg, logoImg] = await Promise.all([
 			loadImage(qrCodeUrl),
 			resolvedCoverImage
 				? loadImage(resolvedCoverImage)
 				: Promise.resolve(null),
 			resolvedAvatar ? loadImage(resolvedAvatar) : Promise.resolve(null),
+			resolvedSiteLogo ? loadImage(resolvedSiteLogo) : Promise.resolve(null),
 		]);
 
 	function resolveImageSource(
@@ -246,7 +317,7 @@ async function generatePoster() {
 		let currentY = 0;
 
 		// Cover
-		const coverHeight = (resolvedCoverImage ? 200 : 120) * scale;
+		const coverHeight = (coverImg ? 200 : 64) * scale;
 		currentY += coverHeight;
 		currentY += padding; // Gap after cover
 
@@ -520,7 +591,8 @@ async function generatePoster() {
 
 		const authorTextX =
 			padding + (resolvedAvatar ? 64 * scale + 16 * scale : 0);
-		const textCenterY = footerY + 32 * scale;
+		const authorMaxWidth = qrX - 24 * scale - authorTextX;
+		const textCenterY = authorY + 32 * scale;
 
 		ctx.textAlign = "left";
 		ctx.textBaseline = "top";
