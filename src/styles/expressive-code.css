@@ -90,6 +90,11 @@ body.wallpaper-transparent .expressive-code .frame {
   background: var(--card-bg-transparent) !important;
 }
 
+/* 透明模式下折叠遮罩改淡入半透明卡片背景，避免底部糊出一条不透明色块 */
+body.wallpaper-transparent .expressive-code .ec-collapse__gradient {
+  --ec-collapse-bg-color: var(--card-bg-transparent);
+}
+
 /* ===== Tab 代码块（rehype-code-group） ===== */
 /*
  * 沿用插件自带的原生样式（下划线式标签），
