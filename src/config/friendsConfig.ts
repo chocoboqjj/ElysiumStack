@@ -256,7 +256,7 @@ export const friendsConfig: FriendLink[] = [
 	{
 		"title": "索玛",
 		"siteurl": "https://suo.ma",
-		"imgurl": "https://suo.ma/favicon.ico",
+		"imgurl": "https://www.suo.ma/img/favicon.ico ",
 		"desc": "",
 		"tags": [
 			"Blog", "退网仙人"
